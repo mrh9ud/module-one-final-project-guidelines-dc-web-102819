@@ -3,6 +3,7 @@ class AnswersTable < ActiveRecord::Migration[6.0]
     create_table :answers do |t|
       t.string :title
       t.string :body
+      t.integer :question_id
       t.timestamps
     end
   end
