@@ -16,10 +16,19 @@ def user_greeting
         more_info = PROMPT.yes?("Great! Would you like to hear about how #{PROGRAM_NAME} works?")
         if more_info
             puts "General Info. about Program"
+        else
+            main_menu
         end
     else
-
+        main_menu
     end
 end
 
-# prompt.select("Choose your destiny?", %w(Scorpion Kano Jax))
+def main_menu
+    main_menu = PROMPT.select("#{PROGRAM_NAME} Main Menu:") do |menu|
+        menu.choice "Tags"
+        menu.choice "Questions"
+        menu.choice "Answers"
+        menu.choice "Date Posted"
+    end
+end
