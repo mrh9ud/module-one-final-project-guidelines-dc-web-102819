@@ -1,5 +1,4 @@
 require_relative '../config/environment'
+require_relative 'methods.rb'
 
-
-
-puts "HELLO WORLD"
+run_program
