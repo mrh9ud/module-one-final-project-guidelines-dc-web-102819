@@ -9,7 +9,7 @@ class CLI
     def run_program
       puts "Welcome to:"
       puts USE_ARTII.asciify(PROGRAM_NAME)
-      # most_common_tags
+    #   load_image
       user_greeting
     end
 
@@ -78,8 +78,9 @@ class CLI
         @@tag_menu_selection = PROMPT.select("Tag Menu:") do |tag_menu|
             tag_menu.choice "Most Common Tags"
             tag_menu.choice "Tags Listed by Frequency of Use"
-            tag_menu.choice "Sort Answers by Tags"
-            tag_menu.choice "Sort Questions by Tags"
+            tag_menu.choice "Tags by Date Added"
+            tag_menu.choice "List of all Tags"
+            tag_menu.choice "Find by Tag Name"
         end
         sub_tag_menu_case_selector
     end
@@ -90,11 +91,20 @@ class CLI
                 Tag.most_common_tags
             when @@tag_menu_selection = "Tags Listed by Frequency of Use"
                 Tag.tags_by_frequency
-            when @@tag_menu_selection = "Sort Answers by Tags"
-                Tag.answers_sorted_by_tags
-            when @@tag_menu_selection = "Sort Questions by Tags"
-                Tag.questions_sorted_by_tags
+            when @@tag_menu_selection = "Tags by Date Added"
+                Tag.tags_by_date_added
+            when @@tag_menu_selection = "List of all Tags"
+                Tag.all_tags
+            when @@tag_menu_selection = "Find by Tag Name"
+                #take user input for tag search
+                tag_search
             end
+    end
+
+    def tag_search
+        puts "\n"
+        tag_filter_selection = PROMPT.ask("Filter by Tag Name")
+        Tag.find_by_name(tag_filter_selection)
     end
 
     # def sub_question_menu_case_selector

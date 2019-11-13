@@ -28,6 +28,7 @@ tag7 = Tag.create(name: "Data Types")
 tag8 = Tag.create(name: "Macros")
 tag9 = Tag.create(name: "Blobs")
 
+
 QuestionTag.create(question_id: question1.id, tag_id: tag1.id)
 QuestionTag.create(question_id: question1.id, tag_id: tag5.id)
 QuestionTag.create(question_id: question1.id, tag_id: tag3.id)

@@ -12,15 +12,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-<<<<<<< HEAD
     artii (2.1.2)
-=======
     catpix (0.2.0)
       docopt (~> 0.5, >= 0.5.0)
       rmagick (~> 2.15, >= 2.15.2)
       ruby-terminfo (~> 0.1, >= 0.1.1)
       tco (~> 0.1, >= 0.1.8)
->>>>>>> 873da1be6c60375ce4cf6a99a73e19853117cd8f
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     docopt (0.6.1)
@@ -73,11 +70,8 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
-<<<<<<< HEAD
   artii
-=======
   catpix
->>>>>>> 873da1be6c60375ce4cf6a99a73e19853117cd8f
   pry
   rake
   require_all
