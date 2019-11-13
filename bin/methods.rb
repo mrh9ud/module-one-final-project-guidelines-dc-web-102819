@@ -86,7 +86,7 @@ class CLI
             when @@tag_menu_selection = "Most Common Tags"
                 Tag.most_common_tags
             when @@tag_menu_selection = "Tags Listed by Frequency of Use"
-                Tag.most_frequent_tags
+                Tag.tags_by_frequency
             when @@tag_menu_selection = "Sort Answers by Tags"
                 Tag.answers_sorted_by_tags
             when @@tag_menu_selection = "Sort Questions by Tags"
