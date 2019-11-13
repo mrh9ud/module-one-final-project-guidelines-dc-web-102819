@@ -6,7 +6,7 @@ class CLI
 
     def run_program
         puts "Welcome to Ruby Overflow!"
-        # most_common_tags
+        load_image
         user_greeting
     end
 
@@ -132,4 +132,14 @@ class CLI
     #             Question.questions_sorted_by_tags 
     #         end
     # end
+
+    def load_image
+        Catpix::print_image "./images/profile_pic.jpeg",
+            :limit_x => 1.0,
+            :limit_y => 0,
+            :center_x => true,
+            :center_y => true,
+            :bg => "white",
+            :bg_fill => true
+    end
 end

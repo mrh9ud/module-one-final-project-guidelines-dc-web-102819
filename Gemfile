@@ -8,3 +8,7 @@ gem 'rake'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'tty-prompt'
+gem 'catpix'
+gem 'rmagick'
+
+
