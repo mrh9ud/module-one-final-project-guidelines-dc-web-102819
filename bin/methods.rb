@@ -6,7 +6,7 @@ class CLI
 
     def run_program
         puts "Welcome to Ruby Overflow!"
-        load_image
+        # load_image
         user_greeting
     end
 
@@ -134,12 +134,13 @@ class CLI
     # end
 
     def load_image
-        Catpix::print_image "./images/profile_pic.jpeg",
+        Catpix::print_image "./images/there.png",
             :limit_x => 1.0,
             :limit_y => 0,
             :center_x => true,
             :center_y => true,
             :bg => "white",
-            :bg_fill => true
+            :bg_fill => true,
+            :resolution => "high"
     end
 end
