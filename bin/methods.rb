@@ -3,11 +3,14 @@ class CLI
     PROMPT = TTY::Prompt.new
     PROGRAM_NAME = "Ruby Overflow"
     PROGRAM_INFO = "General Info. about Program"
+    USE_ARTII = Artii::Base.new
+
 
     def run_program
-        puts "Welcome to Ruby Overflow!"
-        # most_common_tags
-        user_greeting
+      puts "Welcome to:"
+      puts USE_ARTII.asciify(PROGRAM_NAME)
+      # most_common_tags
+      user_greeting
     end
 
     def username
@@ -50,7 +53,7 @@ class CLI
                 date_posted_menu
             end
     end
-        
+
     def tag_menu
         tag_menu = PROMPT.select("Tag Menu:") do |tag_menu|
             tag_menu.choice "Most Common Tags"
@@ -82,10 +85,10 @@ class CLI
     end
     # def most_common_tags
     #     sql = <<-SQL
-    #         SELECT tags.name, COUNT(question_tags.tag_id) 
-    #         FROM question_tags 
-    #         INNER JOIN tags ON 
-    #         question_tags.tag_id = tags.id 
+    #         SELECT tags.name, COUNT(question_tags.tag_id)
+    #         FROM question_tags
+    #         INNER JOIN tags ON
+    #         question_tags.tag_id = tags.id
     #         GROUP BY question_tags.tag_id LIMIT 2
     #     SQL
     #     DB[:conn].execute(sql)
