@@ -1,4 +1,5 @@
 class Tag < ActiveRecord::Base
+    USE_ARTII = Artii::Base.new
     has_many :question_tags
 
     def self.most_common_tags
@@ -33,6 +34,10 @@ class Tag < ActiveRecord::Base
 
     def self.find_by_name(tag_name)
         tag = Tag.find_by name: tag_name
-        puts tag.name
+        if tag.nil?
+            puts "\nTag doesn't exist! Try Again!"
+        else
+            puts USE_ARTII.asciify(tag.name)
+        end
     end
 end

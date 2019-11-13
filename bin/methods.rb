@@ -31,6 +31,7 @@ class CLI
     end
 
     def main_menu
+        puts "\n"
         @@main_menu_selection = PROMPT.select("#{PROGRAM_NAME} Main Menu:") do |menu|
             menu.choice "Tags"
             menu.choice "Questions"
@@ -75,12 +76,14 @@ class CLI
     end
 
     def tag_menu
+        puts "\n"
         @@tag_menu_selection = PROMPT.select("Tag Menu:") do |tag_menu|
             tag_menu.choice "Most Common Tags"
             tag_menu.choice "Tags Listed by Frequency of Use"
             tag_menu.choice "Tags by Date Added"
             tag_menu.choice "List of all Tags"
             tag_menu.choice "Find by Tag Name"
+            tag_menu.choice "Return to Main Menu"
         end
         sub_tag_menu_case_selector
     end
@@ -89,15 +92,21 @@ class CLI
         case @@tag_menu_selection
             when @@tag_menu_selection = "Most Common Tags"
                 Tag.most_common_tags
+                tag_menu
             when @@tag_menu_selection = "Tags Listed by Frequency of Use"
                 Tag.tags_by_frequency
+                tag_menu
             when @@tag_menu_selection = "Tags by Date Added"
                 Tag.tags_by_date_added
+                tag_menu
             when @@tag_menu_selection = "List of all Tags"
                 Tag.all_tags
+                tag_menu
             when @@tag_menu_selection = "Find by Tag Name"
-                #take user input for tag search
                 tag_search
+                tag_menu
+            when @@tag_menu_selection = "Return to Main Menu"
+                main_menu
             end
     end
 
@@ -105,6 +114,7 @@ class CLI
         puts "\n"
         tag_filter_selection = PROMPT.ask("Filter by Tag Name")
         Tag.find_by_name(tag_filter_selection)
+        
     end
 
     # def sub_question_menu_case_selector
