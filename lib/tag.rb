@@ -36,6 +36,8 @@ class Tag < ActiveRecord::Base
         tag = Tag.find_by name: tag_name
         if tag.nil?
             puts "\nTag doesn't exist! Try Again!"
+            puts "If you can't figure out a tag name, press escape"
+            CLI.tag_search
         else
             puts USE_ARTII.asciify(tag.name)
         end

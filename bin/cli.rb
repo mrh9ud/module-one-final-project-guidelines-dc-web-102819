@@ -103,14 +103,14 @@ class CLI
                 Tag.all_tags
                 tag_menu
             when @@tag_menu_selection = "Find by Tag Name"
-                tag_search
+                CLI.tag_search
                 tag_menu
             when @@tag_menu_selection = "Return to Main Menu"
                 main_menu
             end
     end
 
-    def tag_search
+    def self.tag_search
         puts "\n"
         tag_filter_selection = PROMPT.ask("Filter by Tag Name")
         Tag.find_by_name(tag_filter_selection)
