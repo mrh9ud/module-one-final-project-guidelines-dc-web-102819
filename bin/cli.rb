@@ -120,6 +120,18 @@ class CLI
             main_menu
         end
     end
+    
+    def self.tag_search
+        puts "\n"
+        tag_filter_selection = PROMPT.ask("Filter by Tag Name")
+        Tag.find_by_name(tag_filter_selection)
+    end
+    
+    def self.question_search
+        puts "\n"
+        question_filter_selection = PROMPT.ask("Filter by Question Name")
+        Question.find_by_title(question_filter_selection)
+    end
 
     def answer_menu
         @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
@@ -134,13 +146,6 @@ class CLI
             date_posted.choice
         end
     end
-    
-    def self.tag_search
-        puts "\n"
-        tag_filter_selection = PROMPT.ask("Filter by Tag Name")
-        Tag.find_by_name(tag_filter_selection)
-        CLI.escape_menu
-    end
 
     def self.escape_menu
         # READER.on(:keyescape) do |event|
@@ -148,10 +153,6 @@ class CLI
         #         tag_menu
         #     end
         # end
-    end
-    
-    def self.question_search
-        
     end
 
     # def sub_answer_menu_case_selector

@@ -42,11 +42,6 @@ class Tag < ActiveRecord::Base
         if tag.nil?
             puts "\nTag doesn't exist! Try Again!"
             puts "If you can't figure out a tag name, press escape"
-            READER.on(:keyescape) do |event|
-                if event.value == 'q'
-                    puts 'it works'
-                end
-            end        
             CLI.tag_search
         else
             puts "\n"

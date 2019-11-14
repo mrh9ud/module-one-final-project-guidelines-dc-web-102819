@@ -3,10 +3,10 @@ Tag.destroy_all
 QuestionTag.destroy_all
 Answer.destroy_all
 
-question1 = Question.create(title: "How to code with Ruby?", body: "Hello, I'm a newbie.")
-question2 = Question.create(title: "Difference between string and blob?", body: "Why will .blob not function in SQLite3?")
-question3 = Question.create(title: "Confused about SQLite3?", body: "How to implement has-many relationships in Ruby for SQL")
-question4 = Question.create(title: "SQL Join Tables?", body: "What are some shortcuts for ORM for SQL in Ruby")
+question1 = Question.create(title: "How do you begin to code with Ruby?", body: "Hello, I'm a newbie.")
+question2 = Question.create(title: "What is the difference between a string and a blob?", body: "Why will .blob not function in SQLite3?")
+question3 = Question.create(title: "Can anyone clarify my confusion about SQLite3?", body: "How to implement has-many relationships in Ruby for SQL")
+question4 = Question.create(title: "What methods are useful for SQL join tables?", body: "What are some shortcuts for ORM for SQL in Ruby")
 question5 = Question.create(title: "What is a gem file?", body: "Which are the most useful gems to use in Ruby and how do they work")
 
 Answer.create(title: "Here's something that might help", body: "Hello newbie, you can check the ruby docs and tutorials link: https://ruby-doc.org/", question_id: question1.id)
