@@ -15,8 +15,7 @@ class CLI
     end
 
     def username
-        user_name = PROMPT.ask('What is your name?')
-        puts "\n"
+        user_name = PROMPT.ask('What is your name?')        
     end
 
     def user_greeting
@@ -26,37 +25,34 @@ class CLI
             puts PROGRAM_INFO
             press_enter("\nPress Enter to Continue to the Main Menu...")
         end
-        main_menu
+        CLI.main_menu
     end
 
-    def main_menu
+    def self.main_menu
         puts "\n"
         @@main_menu_selection = PROMPT.select("#{PROGRAM_NAME} Main Menu:") do |menu|
             menu.choice "Tags"
             menu.choice "Questions"
             menu.choice "Answers"
-            menu.choice "Date Posted"
             menu.choice "Exit the program"
         end
-        sub_menu_case_selector
+        CLI.sub_menu_case_selector
     end
 
-    def sub_menu_case_selector
+    def self.sub_menu_case_selector
         case @@main_menu_selection
         when @@main_menu_selection = "Tags"
-            tag_menu
+            CLI.tag_menu
         when @@main_menu_selection = "Questions"
             CLI.question_menu
         when @@main_menu_selection = "Answers"
-            answer_menu
-        when @@main_menu_selection = "Date Posted"
-            date_posted_menu
+            CLI.answer_menu
         when @@main_menu_selection = "Exit the program"
             close_ruby_overflow
         end
     end
 
-    def tag_menu
+    def self.tag_menu
         puts "\n"
         @@tag_menu_selection = PROMPT.select("Tag Menu:") do |tag_menu|
             tag_menu.choice "Most Common Tags"
@@ -66,28 +62,28 @@ class CLI
             tag_menu.choice "Find by Tag Name"
             tag_menu.choice "Return to Main Menu"
         end
-        sub_tag_menu_case_selector
+        CLI.sub_tag_menu_case_selector
     end
 
-    def sub_tag_menu_case_selector
+    def self.sub_tag_menu_case_selector
         case @@tag_menu_selection
         when @@tag_menu_selection = "Most Common Tags"
             Tag.most_common_tags
-            tag_menu
+            CLI.tag_menu
         when @@tag_menu_selection = "Tags Listed by Frequency of Use"
             Tag.tags_by_frequency
-            tag_menu
+            CLI.tag_menu
         when @@tag_menu_selection = "Tags by Date Added"
             Tag.tags_by_date_added
-            tag_menu
+            CLI.tag_menu
         when @@tag_menu_selection = "List of all Tags"
             Tag.all_tags
-            tag_menu
+            CLI.tag_menu
         when @@tag_menu_selection = "Find by Tag Name"
             CLI.tag_search
-            tag_menu
+            CLI.tag_menu
         when @@tag_menu_selection = "Return to Main Menu"
-            main_menu
+            CLI.main_menu
         end
     end
 
@@ -118,11 +114,11 @@ class CLI
             CLI.question_by_tags_search
             CLI.question_menu
         when @@question_menu_selection = "Return to Main Menu"
-            main_menu
+            CLI.main_menu
         end
     end
     
-    def answer_menu
+    def self.answer_menu
         puts "\n"
         @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
             answer_menu.choice "Answers sort by Title"
@@ -131,25 +127,25 @@ class CLI
             answer_menu.choice "Answers find by Title"
             answer_menu.choice "Return to Main Menu"
         end
-        sub_answer_menu_case_selector
+        CLI.sub_answer_menu_case_selector
     end
 
-    def sub_answer_menu_case_selector
+    def self.sub_answer_menu_case_selector
         case @@answer_menu_selection
         when @@answer_menu_selection = "Answers sort by Title"
             Answer.sorted_by_title
-            answer_menu
+            CLI.answer_menu
         when @@answer_menu_selection = "Answers sort by Date"
             Answer.sorted_by_date
-            answer_menu
+            CLI.answer_menu
         when @@answer_menu_selection = "Answers sort by Content"
             Answer.sorted_by_body
-            answer_menu
+            CLI.answer_menu
         when @@answer_menu_selection = "Answers find by Title"
             CLI.answer_search_by_title
-            answer_menu
+            CLI.answer_menu
         when @@answer_menu_selection = "Return to Main Menu"
-            main_menu
+            CLI.main_menu
         end
     end
 

@@ -1,7 +1,8 @@
 class Tag < ActiveRecord::Base
-    USE_ARTII = Artii::Base.new
-    READER = TTY::Reader.new
     has_many :question_tags
+    
+    USE_ARTII = Artii::Base.new
+    PROMPT = TTY::Prompt.new
 
     def self.most_common_tags
        most_common_tags = Tag.joins(:question_tags).select("tags.name, COUNT(question_tags.tag_id)").group("question_tags.tag_id").limit(2)
@@ -40,9 +41,13 @@ class Tag < ActiveRecord::Base
     def self.find_by_name(tag_name)
         tag = Tag.find_by name: tag_name
         if tag.nil?
-            puts "\nTag doesn't exist! Try Again!"
-            puts "If you can't figure out a tag name, press escape"
-            CLI.tag_search
+            puts"\n"
+            keep_searching = PROMPT.yes?("No result found. Would you like to keep searching?")
+            if keep_searching
+                CLI.tag_search
+            else
+                CLI.tag_menu
+            end
         else
             puts "\n"
             puts USE_ARTII.asciify(tag.name)

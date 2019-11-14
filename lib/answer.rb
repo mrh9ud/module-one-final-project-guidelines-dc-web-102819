@@ -1,6 +1,8 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
+  
   USE_ARTII = Artii::Base.new
+  PROMPT = TTY::Prompt.new
 
   def self.sorted_by_title
     puts "\n"
@@ -34,8 +36,13 @@ class Answer < ActiveRecord::Base
   def self.find_by_title(title_to_search)
     question_to_find = Answer.find_by title: title_to_search
     if question_to_find.nil?
-      puts "\n Answer doesn't exist. Try again!"
-      CLI.answer_search_by_title
+      puts "\n"
+      keep_searching = PROMPT.yes?("No result found. Would you like to keep searching?")
+      if keep_searching
+        CLI.answer_search_by_title
+      else
+        CLI.answer_menu
+      end
     else
       puts question_to_find.title
     end
