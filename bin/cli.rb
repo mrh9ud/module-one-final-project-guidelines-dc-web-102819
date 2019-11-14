@@ -1,11 +1,11 @@
 class CLI
 
     PROMPT = TTY::Prompt.new
-    PROGRAM_NAME = "Ruby Overflow"
-    PROGRAM_INFO = "General Info. about Program"
     USE_ARTII = Artii::Base.new
     READER = TTY::Reader.new
 
+    PROGRAM_NAME = "Ruby Overflow"
+    PROGRAM_INFO = "General Info. about Program"
 
     def run_program
       puts "Welcome to:"
@@ -29,7 +29,7 @@ class CLI
         main_menu
     end
 
-    
+
     def main_menu
         puts "\n"
         @@main_menu_selection = PROMPT.select("#{PROGRAM_NAME} Main Menu:") do |menu|
@@ -37,6 +37,7 @@ class CLI
         menu.choice "Questions"
         menu.choice "Answers"
         menu.choice "Date Posted"
+        menu.choice "Exit the program"
         end
         sub_menu_case_selector
     end
@@ -44,16 +45,18 @@ class CLI
     def sub_menu_case_selector
         case @@main_menu_selection
             when @@main_menu_selection = "Tags"
-                tag_menu
+              tag_menu
             when @@main_menu_selection = "Questions"
-                question_menu
+              question_menu
             when @@main_menu_selection = "Answers"
-                answer_menu
+              answer_menu
             when @@main_menu_selection = "Date Posted"
-                date_posted_menu
+              date_posted_menu
+            when @@main_menu_selection = "Exit the program"
+              close_ruby_overflow
             end
         end
-        
+
         def tag_menu
             puts "\n"
             @@tag_menu_selection = PROMPT.select("Tag Menu:") do |tag_menu|
@@ -66,7 +69,7 @@ class CLI
         end
         sub_tag_menu_case_selector
     end
-    
+
     def sub_tag_menu_case_selector
         case @@tag_menu_selection
         when @@tag_menu_selection = "Most Common Tags"
@@ -88,7 +91,7 @@ class CLI
             main_menu
         end
     end
-    
+
     def question_menu
         puts "\n"
         @@question_menu_selection = PROMPT.select("Question Menu:") do |question_menu|
@@ -100,7 +103,7 @@ class CLI
         end
         sub_question_menu_case_selector
     end
-    
+
     def sub_question_menu_case_selector
         case @@question_menu_selection
         when @@question_menu_selection = "Questions Listed by Date Added"
@@ -119,43 +122,29 @@ class CLI
             main_menu
         end
     end
-    
+
     def self.question_by_tags_search
         puts "\n"
         question_filter_by_tag_selection = PROMPT.ask("Filter Questions by Tag Name")
         Question.find_question_by_tag(question_filter_by_tag_selection)
     end
-    
+
     def self.tag_search
         puts "\n"
         tag_filter_selection = PROMPT.ask("Filter by Tag Name")
         Tag.find_by_name(tag_filter_selection)
     end
-    
+
     def self.question_search
         puts "\n"
         question_filter_selection = PROMPT.ask("Filter by Question Name")
         Question.find_by_title(question_filter_selection)
     end
-    
-    def answer_menu
-        @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
-            answer_menu.choice
-            answer_menu.choice
-        end
-    end
-    
-    def date_posted_menu
-        @@date_posted_menu_selection = PROMPT.select("Date Posted Menu:") do |date_posted_menu|
-            date_posted.choice
-            date_posted.choice
-        end
-    end
-    
+
     def press_enter(message)
         PROMPT.keypress(message, keys: [:return])
     end
-    
+
     def load_image
         Catpix::print_image "./images/there.png",
         :limit_x => 1.0,
@@ -175,16 +164,48 @@ class CLI
         # end
     end
 
-    # def sub_answer_menu_case_selector
-    #     case @@answer_menu_selection
-    #         when @@answer_menu_selection = ""
-    #             Answer.most_common_tags
-    #         when @@answer_menu_selection = ""
-    #             Answer.most_frequent_tags
-    #         when @@answer_menu_selection = ""
-    #             Answer.answers_sorted_by_tags
-    #         when @@answer_menu_selection = ""
-    #             Answer.questions_sorted_by_tags
-    #         end
-    # end
+    def answer_menu
+      puts "\n"
+      @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
+        answer_menu.choice "Answers sort by Title"
+        answer_menu.choice "Answers sort by Date"
+        answer_menu.choice "Answers sort by Content"
+        answer_menu.choice "Answers find by Title"
+        answer_menu.choice "Return to Main Menu"
+      end
+      sub_answer_menu_case_selector
+    end
+
+    def sub_answer_menu_case_selector
+      case @@answer_menu_selection
+      when @@answer_menu_selection = "Answers sort by Title"
+        Answer.sorted_by_title
+        answer_menu
+      when @@answer_menu_selection = "Answers sort by Date"
+        Answer.sorted_by_date
+        answer_menu
+      when @@answer_menu_selection = "Answers sort by Content"
+        Answer.sorted_by_body
+        answer_menu
+      when @@answer_menu_selection = "Answers find by Title"
+        CLI.answer_search_by_title
+        answer_menu
+      when @@answer_menu_selection = "Return to Main Menu"
+        main_menu
+      end
+    end
+
+    def self.answer_search_by_title
+      puts "\n"
+      answer_search_parameter = PROMPT.ask("Filter by Answer Title")
+      Answer.find_by_title(answer_search_parameter)
+    end
+
+    def close_ruby_overflow
+      begin
+        exit
+      rescue SystemExit
+        p "Closing #{PROGRAM_NAME}"
+      end
+    end
 end

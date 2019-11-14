@@ -10,7 +10,5 @@ gem 'sinatra-activerecord'
 gem 'tty-prompt'
 gem 'tty-reader'
 gem 'artii'
-gem 'catpix'
-gem 'rmagick'
-
-
+# gem 'catpix'
+# gem 'rmagick'
