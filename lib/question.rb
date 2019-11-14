@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
     USE_ARTII = Artii::Base.new
     has_many :answers
     has_many :question_tags
+    has_many :tags, through: :question_tags
     
     def self.questions_by_date_added
         question_dates = Question.order(:created_at)
@@ -35,5 +36,6 @@ class Question < ActiveRecord::Base
 
     def self.find_question_by_tag(tag_name)
         
+        binding.pry
     end
 end

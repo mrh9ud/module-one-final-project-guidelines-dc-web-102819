@@ -16,28 +16,27 @@ class CLI
 
     def username
         user_name = PROMPT.ask('What is your name?')
+        puts "\n"
     end
 
     def user_greeting
         more_info = PROMPT.yes?("Hello, #{username}! Would you like more information about #{PROGRAM_NAME} before continuing?")
         if more_info
+            puts "\n"
             puts PROGRAM_INFO
             press_enter("\nPress Enter to Continue to the Main Menu...")
         end
         main_menu
     end
 
-    def press_enter(message)
-        PROMPT.keypress(message, keys: [:return])
-    end
-
+    
     def main_menu
         puts "\n"
         @@main_menu_selection = PROMPT.select("#{PROGRAM_NAME} Main Menu:") do |menu|
-            menu.choice "Tags"
-            menu.choice "Questions"
-            menu.choice "Answers"
-            menu.choice "Date Posted"
+        menu.choice "Tags"
+        menu.choice "Questions"
+        menu.choice "Answers"
+        menu.choice "Date Posted"
         end
         sub_menu_case_selector
     end
@@ -53,15 +52,15 @@ class CLI
             when @@main_menu_selection = "Date Posted"
                 date_posted_menu
             end
-    end
-    
-    def tag_menu
-        puts "\n"
-        @@tag_menu_selection = PROMPT.select("Tag Menu:") do |tag_menu|
-            tag_menu.choice "Most Common Tags"
-            tag_menu.choice "Tags Listed by Frequency of Use"
-            tag_menu.choice "Tags by Date Added"
-            tag_menu.choice "List of all Tags"
+        end
+        
+        def tag_menu
+            puts "\n"
+            @@tag_menu_selection = PROMPT.select("Tag Menu:") do |tag_menu|
+                tag_menu.choice "Most Common Tags"
+                tag_menu.choice "Tags Listed by Frequency of Use"
+                tag_menu.choice "Tags by Date Added"
+                tag_menu.choice "List of all Tags"
             tag_menu.choice "Find by Tag Name"
             tag_menu.choice "Return to Main Menu"
         end
@@ -89,7 +88,7 @@ class CLI
             main_menu
         end
     end
-      
+    
     def question_menu
         puts "\n"
         @@question_menu_selection = PROMPT.select("Question Menu:") do |question_menu|
@@ -114,11 +113,17 @@ class CLI
             CLI.question_search
             question_menu
         when @@question_menu_selection = "Find a Question by its Tags"
-            Question.find_question_by_tag(tag_name)
+            CLI.question_by_tags_search
             question_menu
         when @@question_menu_selection = "Return to Main Menu"
             main_menu
         end
+    end
+    
+    def self.question_by_tags_search
+        puts "\n"
+        question_filter_by_tag_selection = PROMPT.ask("Filter Questions by Tag Name")
+        Question.find_question_by_tag(question_filter_by_tag_selection)
     end
     
     def self.tag_search
@@ -132,7 +137,7 @@ class CLI
         question_filter_selection = PROMPT.ask("Filter by Question Name")
         Question.find_by_title(question_filter_selection)
     end
-
+    
     def answer_menu
         @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
             answer_menu.choice
@@ -145,6 +150,21 @@ class CLI
             date_posted.choice
             date_posted.choice
         end
+    end
+    
+    def press_enter(message)
+        PROMPT.keypress(message, keys: [:return])
+    end
+    
+    def load_image
+        Catpix::print_image "./images/there.png",
+        :limit_x => 1.0,
+        :limit_y => 0,
+        :center_x => true,
+        :center_y => true,
+        :bg => "white",
+            :bg_fill => true,
+            :resolution => "high"
     end
 
     def self.escape_menu
@@ -167,28 +187,4 @@ class CLI
     #             Answer.questions_sorted_by_tags
     #         end
     # end
-    
-    # def sub_date_posted_menu_case_selector
-    #     case @@date_posted_menu_selection
-    #         when @@date_posted_menu_selection = ""
-    #             Question.most_common_tags
-    #         when @@date_posted_menu_selection = ""
-    #             Question.most_frequent_tags
-    #         when @@date_posted_menu_selection = ""
-    #             Question.answers_sorted_by_tags
-    #         when @@date_posted_menu_selection = ""
-    #             Question.questions_sorted_by_tags
-    #         end
-    # end
-
-    def load_image
-        Catpix::print_image "./images/there.png",
-            :limit_x => 1.0,
-            :limit_y => 0,
-            :center_x => true,
-            :center_y => true,
-            :bg => "white",
-            :bg_fill => true,
-            :resolution => "high"
-    end
 end
