@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
     has_many :question_tags
+    has_many :questions, through: :question_tags
     
     USE_ARTII = Artii::Base.new
     PROMPT = TTY::Prompt.new
@@ -22,11 +23,10 @@ class Tag < ActiveRecord::Base
 
     def self.tags_by_date_added
         tag_dates = Tag.order(:created_at)
-        puts "\n"
         tag_dates.each do |tag|
             tag_name = tag.name
             tag_date = tag.created_at.to_s
-            puts tag_name + '   ' + tag_date
+            puts "\n" + tag_name + "\n" + "Added on:  " + tag_date
         end
     end
 

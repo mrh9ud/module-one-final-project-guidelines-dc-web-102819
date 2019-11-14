@@ -48,7 +48,7 @@ class CLI
         when @@main_menu_selection = "Answers"
             CLI.answer_menu
         when @@main_menu_selection = "Exit the program"
-            close_ruby_overflow
+            CLI.close_ruby_overflow
         end
     end
 
@@ -111,7 +111,7 @@ class CLI
             CLI.question_search
             CLI.question_menu
         when @@question_menu_selection = "Find a Question by its Tags"
-            CLI.question_by_tags_search
+            Question.question_by_tags_search
             CLI.question_menu
         when @@question_menu_selection = "Return to Main Menu"
             CLI.main_menu
@@ -123,7 +123,7 @@ class CLI
         @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
             answer_menu.choice "Answers sort by Title"
             answer_menu.choice "Answers sort by Date"
-            answer_menu.choice "Answers sort by Content"
+            answer_menu.choice "List of all Answers"
             answer_menu.choice "Answers find by Title"
             answer_menu.choice "Return to Main Menu"
         end
@@ -138,7 +138,7 @@ class CLI
         when @@answer_menu_selection = "Answers sort by Date"
             Answer.sorted_by_date
             CLI.answer_menu
-        when @@answer_menu_selection = "Answers sort by Content"
+        when @@answer_menu_selection = "List of all Answers"
             Answer.sorted_by_body
             CLI.answer_menu
         when @@answer_menu_selection = "Answers find by Title"
@@ -147,12 +147,6 @@ class CLI
         when @@answer_menu_selection = "Return to Main Menu"
             CLI.main_menu
         end
-    end
-
-    def self.question_by_tags_search
-        puts "\n"
-        question_filter_by_tag_selection = PROMPT.ask("Filter Questions by Tag Name")
-        Question.find_question_by_tag(question_filter_by_tag_selection)
     end
 
     def self.tag_search
@@ -177,7 +171,7 @@ class CLI
         PROMPT.keypress(message, keys: [:return])
     end
     
-    def close_ruby_overflow
+    def self.close_ruby_overflow
         begin
             exit
         rescue SystemExit

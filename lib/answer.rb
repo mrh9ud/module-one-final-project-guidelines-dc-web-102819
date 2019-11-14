@@ -6,7 +6,7 @@ class Answer < ActiveRecord::Base
 
   def self.sorted_by_title
     puts "\n"
-    puts "| ID ________| TITLE "
+    puts "|ID___________| TITLE "
     sort_by_name = Answer.order(:title)
     sort_by_name.collect do |answer|
       id = answer.id.to_s
@@ -16,20 +16,18 @@ class Answer < ActiveRecord::Base
   end
 
   def self.sorted_by_date
-    puts "\n"
     sort_by_date = Answer.order(:created_at)
     sort_by_date.collect do |answer|
       answer_title = answer.title
       answer_date = answer.created_at.to_s
-      puts answer_title + " posted on: " + answer_date
+      puts "\n" + answer_title + "\n" + "Posted on:  " + answer_date
     end
   end
 
   def self.sorted_by_body
-    puts "\n"
     sort_by_body = Answer.order(:body)
     sort_by_body.collect do |answer|
-      puts answer.body
+      puts "\n" + answer.body
     end
   end
 

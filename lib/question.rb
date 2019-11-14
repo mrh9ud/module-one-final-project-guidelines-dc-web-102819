@@ -40,8 +40,26 @@ class Question < ActiveRecord::Base
         end
     end
 
-    def self.find_question_by_tag(tag_name)
-        
-        binding.pry
+    def self.question_by_tags_search
+        puts "\n"
+        question_filter_by_tag_selection = PROMPT.ask("Filter Questions by Tag Name")
+        tag_search = Tag.find_by name: question_filter_by_tag_selection
+        if tag_search.nil?
+            keep_searching = PROMPT.yes?("No result found. Would you like to continue searching?")
+            if keep_searching
+                Question.question_by_tags_search
+            else
+                CLI.question_menu
+            end
+        else    
+            result = tag_search.questions
+            Question.display_body_title_question(result)
+        end    
+    end
+
+    def self.display_body_title_question(array)
+        array.collect do |question|
+            puts "\n" + question.title + "\n" + question.body
+        end
     end
 end
