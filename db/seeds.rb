@@ -2,6 +2,9 @@ Question.destroy_all
 Tag.destroy_all
 QuestionTag.destroy_all
 Answer.destroy_all
+User.destroy_all
+
+jose = User.create(name: "Jose Romero")
 
 question1 = Question.create(title: "How do you begin to code with Ruby?", body: "Hello, I'm a newbie.")
 question2 = Question.create(title: "What is the difference between a string and a blob?", body: "Why will .blob not function in SQLite3?")

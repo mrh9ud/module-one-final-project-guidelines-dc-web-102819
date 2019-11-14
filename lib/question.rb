@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
     has_many :answers
     has_many :question_tags
     has_many :tags, through: :question_tags
+    belongs_to :user
     
     USE_ARTII = Artii::Base.new
     PROMPT = TTY::Prompt.new
@@ -61,5 +62,9 @@ class Question < ActiveRecord::Base
         array.collect do |question|
             puts "\n" + question.title + "\n" + question.body
         end
+    end
+
+    def self.create_new_question(title, body, user_id)
+        Question.create(title: title, body: body, user_id: user_id)
     end
 end

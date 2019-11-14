@@ -2,23 +2,61 @@ class CLI
 
     PROMPT = TTY::Prompt.new
     USE_ARTII = Artii::Base.new
-    READER = TTY::Reader.new
 
     PROGRAM_NAME = "Ruby Overflow"
     PROGRAM_INFO = "General Info. about Program"
 
     def run_program
+      puts "\n"
       puts "Welcome to:"
       puts USE_ARTII.asciify(PROGRAM_NAME)
     #   load_image
-      user_greeting
+      ask_if_account
     end
 
-    def username
-        user_name = PROMPT.ask('What is your name?')        
+    def ask_if_account
+        account_prompt = PROMPT.yes?("Do you already have an account with us?")
+        if account_prompt
+            ask_username
+        else
+            create_new_username    
+        end
     end
 
-    def user_greeting
+    def create_new_username
+        puts "\n"
+        new_username = PROMPT.ask("Create an account to continue. Input a username:  ")
+        if username_exists(new_username)
+            puts "\n" + "Username Unavailable"
+            create_new_username
+        else
+            User.create_user(new_username)
+            user_greeting(new_username)
+        end
+    end
+
+    def ask_username
+        puts "\n"
+        username = PROMPT.ask("What is your username?")
+        if username_exists(username)
+            User.store_user
+            user_greeting(username)
+        else
+            puts "\n" + "We cannot find your account. Try again."
+            ask_username
+        end
+    end
+
+    def username_exists(username)
+        get_user = User.all.find do |user|
+            user.name == username
+        end
+        if get_user
+            User.store_user(username)
+        end
+    end
+
+    def user_greeting(username)
         more_info = PROMPT.yes?("Hello, #{username}! Would you like more information about #{PROGRAM_NAME} before continuing?")
         if more_info
             puts "\n"
@@ -94,6 +132,7 @@ class CLI
             question_menu.choice "List of all Questions Asked"
             question_menu.choice "Find a Question by Title"
             question_menu.choice "Find a Question by its Tags"
+            question_menu.choice "Post a New Question"
             question_menu.choice "Return to Main Menu"
         end
         CLI.sub_question_menu_case_selector
@@ -112,6 +151,9 @@ class CLI
             CLI.question_menu
         when @@question_menu_selection = "Find a Question by its Tags"
             Question.question_by_tags_search
+            CLI.question_menu
+        when @@question_menu_selection = "Post a New Question"
+            User.user_question_prompt
             CLI.question_menu
         when @@question_menu_selection = "Return to Main Menu"
             CLI.main_menu
