@@ -99,18 +99,23 @@ class CLI
             question_menu.choice "Find a Question by its Tags"
             question_menu.choice "Return to Main Menu"
         end
+        sub_question_menu_case_selector
     end
     
     def sub_question_menu_case_selector
         case @@question_menu_selection
         when @@question_menu_selection = "Questions Listed by Date Added"
             Question.questions_by_date_added
+            question_menu
         when @@question_menu_selection = "List of all Questions Asked"
             Question.all_questions
+            question_menu
         when @@question_menu_selection = "Find a Question by Title"
             CLI.question_search
+            question_menu
         when @@question_menu_selection = "Find a Question by its Tags"
             Question.find_question_by_tag(tag_name)
+            question_menu
         when @@question_menu_selection = "Return to Main Menu"
             main_menu
         end
@@ -129,7 +134,6 @@ class CLI
             date_posted.choice
         end
     end
-    
     
     def self.tag_search
         puts "\n"
