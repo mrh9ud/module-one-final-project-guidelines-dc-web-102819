@@ -3,7 +3,7 @@ class CLI
   PROGRAM_INFO = "General Info. about Program"
   USE_ARTII = Artii::Base.new
   PROMPT = TTY::Prompt.new
-  
+
   def run_program
     puts "Welcome to:"
     puts USE_ARTII.asciify(PROGRAM_NAME)
@@ -52,14 +52,6 @@ class CLI
       date_posted_menu
     when @@main_menu_selection = "Exit the program"
       close_ruby_overflow
-    end
-  end
-
-  def close_ruby_overflow
-    begin
-      exit
-    rescue SystemExit
-      p "Closing #{PROGRAM_NAME}"
     end
   end
 
@@ -191,4 +183,12 @@ class CLI
       :bg_fill => true,
       :resolution => "high"
   end
+
+  def close_ruby_overflow
+    begin
+      exit
+    rescue SystemExit
+      p "Closing #{PROGRAM_NAME}"
+    end
+  end  
 end
