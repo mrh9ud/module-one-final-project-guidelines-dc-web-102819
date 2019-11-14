@@ -1,8 +1,11 @@
 class Question < ActiveRecord::Base
-    USE_ARTII = Artii::Base.new
+    
     has_many :answers
     has_many :question_tags
     has_many :tags, through: :question_tags
+    
+    USE_ARTII = Artii::Base.new
+    PROMPT = TTY::Prompt.new
     
     def self.questions_by_date_added
         question_dates = Question.order(:created_at)
@@ -25,12 +28,16 @@ class Question < ActiveRecord::Base
     def self.find_by_title(question_title)
         question = Question.find_by title: question_title
         if question.nil?
-            puts "\nQuestion doesn't exist! Try Again!"
-            puts "If you can't figure out a question name, press escape"      
-            CLI.question_search
+            puts "\n"
+            keep_searching = PROMPT.yes?("No result found. Would you like to continue searching?")
+            if keep_searching
+                CLI.question_search
+            else
+                CLI.question_menu
+            end
         else
             puts "\n"
-            puts USE_ARTII.asciify(question.title)
+            puts question.title
         end
     end
 
