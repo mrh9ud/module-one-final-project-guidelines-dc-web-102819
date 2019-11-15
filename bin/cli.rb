@@ -39,7 +39,7 @@ class CLI
         puts "\n"
         username = PROMPT.ask("What is your username?")
         if username_exists(username)
-            User.store_user
+            User.store_user(username)
             user_greeting(username)
         else
             puts "\n" + "We cannot find your account. Try again."
@@ -50,9 +50,6 @@ class CLI
     def username_exists(username)
         get_user = User.all.find do |user|
             user.name == username
-        end
-        if get_user
-            User.store_user
         end
     end
 

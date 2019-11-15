@@ -15,10 +15,11 @@ class User < ActiveRecord::Base
         Question.create_new_question(new_question[:title], new_question[:body], @current_user_id)
     end
 
-    def self.store_user
+    def self.store_user(username)
         get_user = User.all.each do |user|
             if user.name == username
                 @current_user_id = user.id
+                # binding.pry
             end
         end
     end
