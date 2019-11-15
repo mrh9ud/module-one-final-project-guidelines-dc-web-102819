@@ -15,7 +15,7 @@ class CLI
     end
 
     def ask_if_account
-        account_prompt = PROMPT.yes?("Do you already have an account with us?", required: true)
+        account_prompt = PROMPT.yes?("Do you already have an account with us?")
         if account_prompt
             ask_username
         else
@@ -62,8 +62,7 @@ class CLI
     def user_greeting(username)
         more_info = PROMPT.yes?("Hello, #{username}! Would you like more information about #{PROGRAM_NAME} before continuing?")
         if more_info
-            puts "\n"
-            puts "Contributor: Matthew R Heavner"
+            puts "\n" + "Contributor: Matthew R Heavner"
             load_image("./images/profile_pic.jpeg")
             puts "\nContributor: Jose D Romero"
             load_image("./images/avatar.jpeg")
