@@ -1,78 +1,31 @@
-# Module One Final Project Guidelines
+<!-- Ruby Overflow: -->
 
-Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
+We created Ruby Overflow as a narrower rendition of the well-known Stack Overflow application. Ruby Overflow functions as a subset of its parent that focuses on topics related to the Ruby programming lanuage and its related software. We hope that you may find it useful, and please call Jose Romero at 443-848-0869 or Matthew Heavner at 540-271-0906 with any suggestions or concerns. You're currently viewing version 1.0. Our hope is to soon integrate relevant sections of the Stack Overflow API.
 
-For your final project, we'll be building a Command Line database application.
+<!-- Install: -->
 
-## Project Requirements
+Open the main directory for the program through your console. Perform a bundle install to retrieve the gems from the program's gem file that are relevant for its proper functionality. If you encounter any issues with your bundle install, please reference materials on http://rubygems.org. 
 
-### Option One - Data Analytics Project
+After a successful bundle install, launch the program while inside the main directory by inputting "ruby bin/run.rb" into your console. We hope you enjoy our product.
 
-1. Access a Sqlite3 Database using ActiveRecord.
-2. You should have at minimum three models including one join model. This means you must have a many-to-many relationship.
-3. You should seed your database using data that you collect either from a CSV, a website by scraping, or an API.
-4. Your models should have methods that answer interesting questions about the data. For example, if you've collected info about movie reviews, what is the most popular movie? What movie has the most reviews?
-5. You should provide a CLI to display the return values of your interesting methods.  
-6. Use good OO design patterns. You should have separate classes for your models and CLI interface.
+<!-- Contributors: -->
 
-  **Resource:** [Easy Access APIs](https://github.com/learn-co-curriculum/easy-access-apis)
+Jose D Romero:
 
-### Option Two - Command Line CRUD App
+Paraguayan in America: coding around the world.
 
-1. Access a Sqlite3 Database using ActiveRecord.
-2. You should have a minimum of three models.
-3. You should build out a CLI to give your user full CRUD ability for at least one of your resources. For example, build out a command line To-Do list. A user should be able to create a new to-do, see all todos, update a todo item, and delete a todo. Todos can be grouped into categories, so that a to-do has many categories and categories have many to-dos.
-4. Use good OO design patterns. You should have separate models for your runner and CLI interface.
+Matthew R Heavner: 
 
-### Brainstorming and Proposing a Project Idea
+Matt completed a B.A. in Spanish from the University of Virginia in 2017. He proceeded to enter the world of sales in the automotive market and decided to make a significant career change two years later after encountering a greater passion: programming. As a first cohesive Ruby project, Ruby Overflow is an important step in progressive as a software developer.
 
-Projects need to be approved prior to launching into them, so take some time to brainstorm project options that will fulfill the requirements above.  You must have a minimum of four [user stories](https://en.wikipedia.org/wiki/User_story) to help explain how a user will interact with your app.  A user story should follow the general structure of `"As a <role>, I want <goal/desire> so that <benefit>"`. In example, if we were creating an app to randomly choose nearby restaurants on Yelp, we might write:
+<!-- Licensing: -->
 
-* As a user, I want to be able to enter my name to retrieve my records
-* As a user, I want to enter a location and be given a random nearby restaurant suggestion
-* As a user, I should be able to reject a suggestion and not see that restaurant suggestion again
-* As a user, I want to be able to save to and retrieve a list of favorite restaurant suggestions
+MIT License
 
-## Instructions
+Copyright (c) 2019 Matthew Heavner
 
-1. Fork and clone this repository.
-2. Build your application. Make sure to commit early and commit often. Commit messages should be meaningful (clearly describe what you're doing in the commit) and accurate (there should be nothing in the commit that doesn't match the description in the commit message). Good rule of thumb is to commit every 3-7 mins of actual coding time. Most of your commits should have under 15 lines of code and a 2 line commit is perfectly acceptable.
-3. Make sure to create a good README.md with a short description, install instructions, a contributors guide and a link to the license for your code.
-4. Make sure your project checks off each of the above requirements.
-5. Be prepared to present your project to your peers (3 - 5 minutes) 
-  * _See below for instructions_
-6. *OPTIONAL* Prepare a video demo (narration helps!) describing how a user would interact with your working project.
-7. *OPTIONAL*: Write a blog post about the project and process.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-## Short Presentation Requirements
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-Presenting to others on a technical topic is something you will do several times throughout your experience at Flatiron. This will allow you to practice exercising some important skills. 
-
-#### Introducing Yourself
-At the beginning of your presentation you'll want to introduce yourself to the audience. Even if you already know your peers and this feels awkward, this is great & low-stakes way to practice for your personal elevator pitch in a welcoming space. Take it seriously and be kind to others; maybe you'll learn something new about someone!
-
-Aim for a short, 30-second summary of your career progression, leading up to Flatiron School, with an emphasis on your professional skills and goals. Think of it as a condensed narration of your story; where you started, what inspired you to get into coding (did you have a pivotal "aha!" moment?), what you're passionate about, and what you're looking forward to going forward (job and/or career wise).
-
-Here are two examples as inspiration:
-
-> Hi, my name is Pam and building and creating things have always been in my blood. It started when I used to make model airplanes in the 5th grade, and continued through college, during which I took a few computer science classes. After graduating with a environmental sustainability degree I worked at hazardous waste and solar energy companies. It wasn't long before I realized that my creative spirit had been stifled and was aching to escape...and that coding was what truly made me come alive! I'm now thrilled to be here at Flatiron and soon launching my new career in software engineering!
-
-> Hi, my name is Tony and I'm a former educator with a Bachelor and Masters in English and Professional Studies from Stony Brook. I've held roles as a teacher, academic policy programmer, and dean of students at two NYC public high schools. I've always loved puzzles and solving problems, and I see coding as an extension of this. I'm excited to merge my previous background in education with my new found programming skills to launch a new career as a developer in the ed tech space.
-
-There's no right or wrong way to introduce yourself. It's your story, so make it your own. :)
-
-#### Technical Presentation Requirements
-Having built your project on your own with a partner, you are the expert on it! Even though that's the case, talking about techincal topics can be challenging. Do your best to communicate what you have learned in a way others can digest.
-  - Describe something you struggled to build, and show us how you ultimately implemented it in your code.
-  - Discuss 3 things you learned in the process of working on this project.
-  - Address, if anything, what you would change or add to what you have today?
-  - Present any code you would like to highlight.   
-  - Be prepared to answer questions from your peers!
-
----
-### Common Questions:
-- How do I turn off my SQL logger?
-```ruby
-# in config/environment.rb add this line:
-ActiveRecord::Base.logger = nil
-```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
         get_user = User.all.each do |user|
             if user.name == username
                 @current_user_id = user.id
-                # binding.pry
             end
         end
     end
