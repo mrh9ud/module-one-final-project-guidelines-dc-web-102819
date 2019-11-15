@@ -35,6 +35,8 @@ class CLI
         end
     end
 
+
+
     def ask_username
         puts "\n"
         username = PROMPT.ask("What is your username?")
@@ -42,8 +44,12 @@ class CLI
             User.store_user(username)
             user_greeting(username)
         else
-            puts "\n" + "We cannot find your account. Try again."
-            ask_username
+            puts "\n"
+            if PROMPT.yes?("Username not found. Would you like to try again?")
+                ask_username
+            else
+                ask_if_account
+            end
         end
     end
 
