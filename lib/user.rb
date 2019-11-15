@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
     def self.create_user(username)
         User.create(name: username)
+        User.store_user(username)
     end
 
     def self.user_question_prompt

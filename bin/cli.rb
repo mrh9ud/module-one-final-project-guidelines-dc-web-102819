@@ -48,7 +48,7 @@ class CLI
     end
 
     def username_exists(username)
-        get_user = User.all.find do |user|
+        User.all.find do |user|
             user.name == username
         end
     end
