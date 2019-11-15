@@ -20,9 +20,16 @@ class User < ActiveRecord::Base
         get_user = User.all.each do |user|
             if user.name == username
                 @current_user_id = user.id
-                # binding.pry
             end
         end
+    end
+
+    def self.user_answer_prompt
+        new_answer = PROMPT.collect do
+            key(:title).ask("Title your answer:  ")
+            key(:body).ask("Enter the details of your answer:  ")
+        end
+        Answer.create_new_answer(title, body, user_id)
     end
 
 end

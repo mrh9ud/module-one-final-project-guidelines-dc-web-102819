@@ -144,7 +144,7 @@ class CLI
             Question.all_questions
             CLI.question_menu
         when @@question_menu_selection = "Find a Question by Title"
-            CLI.question_search
+            Question.question_search
             CLI.question_menu
         when @@question_menu_selection = "Find a Question by its Tags"
             Question.question_by_tags_search
@@ -164,6 +164,7 @@ class CLI
             answer_menu.choice "Answers sort by Date"
             answer_menu.choice "List of all Answers"
             answer_menu.choice "Answers find by Title"
+            answer_menu.choice "Post an Answer to a Question"
             answer_menu.choice "Return to Main Menu"
         end
         CLI.sub_answer_menu_case_selector
@@ -183,6 +184,9 @@ class CLI
         when @@answer_menu_selection = "Answers find by Title"
             CLI.answer_search_by_title
             CLI.answer_menu
+        when @@answer_menu_selection = "Post an Answer to a Question"
+            Question.choose_question_to_answer
+            CLI.answer_menu
         when @@answer_menu_selection = "Return to Main Menu"
             CLI.main_menu
         end
@@ -192,12 +196,6 @@ class CLI
         puts "\n"
         tag_filter_selection = PROMPT.ask("Filter by Tag Name")
         Tag.find_by_name(tag_filter_selection)
-    end
-
-    def self.question_search
-        puts "\n"
-        question_filter_selection = PROMPT.ask("Filter by Question Name")
-        Question.find_by_title(question_filter_selection)
     end
     
     def self.answer_search_by_title

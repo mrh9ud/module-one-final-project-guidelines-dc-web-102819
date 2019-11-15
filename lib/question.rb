@@ -67,4 +67,30 @@ class Question < ActiveRecord::Base
     def self.create_new_question(title, body, user_id)
         Question.create(title: title, body: body, user_id: user_id)
     end
+
+    def self.question_search
+        puts "\n"
+        question_filter_selection = PROMPT.ask("Filter by Question Name")
+        Question.find_by_title(question_filter_selection)
+    end
+
+    def self.choose_question_to_answer
+        search_value = Question.question_search
+        if search value.nil?
+            Question.question_search
+        # Question.all.collect do |question|
+        #     string_question_id = question.id.to_s
+        #     puts "\n" + string_question_id + ": " + question.title
+        # # puts "\n"
+        # # question_to_answer = PROMPT.ask("Which question would you like to answer?")
+        # end
+        # puts "\n"
+        # @@question_number = PROMPT.ask("Enter the number of the question you want to answer:")
+        end
+
+    end
+
+    def question_to_answer_selector
+      
+    end
 end

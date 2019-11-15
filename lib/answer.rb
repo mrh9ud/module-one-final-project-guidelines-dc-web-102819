@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
+  belongs_to :user
   
   USE_ARTII = Artii::Base.new
   PROMPT = TTY::Prompt.new
@@ -45,4 +46,10 @@ class Answer < ActiveRecord::Base
       puts question_to_find.title
     end
   end
+
+  def self.create_new_answer(title, body, user_id)
+    Answer.create(title: title, body: body, user_id: user_id)
+  end
+
+  
 end
