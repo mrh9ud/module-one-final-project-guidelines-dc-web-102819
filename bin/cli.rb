@@ -19,7 +19,7 @@ class CLI
         if account_prompt
             ask_username
         else
-            create_new_username    
+            create_new_username
         end
     end
 
@@ -156,7 +156,7 @@ class CLI
             CLI.main_menu
         end
     end
-    
+
     def self.answer_menu
         puts "\n"
         @@answer_menu_selection = PROMPT.select("Answer Menu:") do |answer_menu|
@@ -199,7 +199,7 @@ class CLI
         question_filter_selection = PROMPT.ask("Filter by Question Name")
         Question.find_by_title(question_filter_selection)
     end
-    
+
     def self.answer_search_by_title
         puts "\n"
         answer_search_parameter = PROMPT.ask("Filter by Answer Title")
@@ -209,7 +209,7 @@ class CLI
     def press_enter(message)
         PROMPT.keypress(message, keys: [:return])
     end
-    
+
     def self.close_ruby_overflow
         begin
             exit
