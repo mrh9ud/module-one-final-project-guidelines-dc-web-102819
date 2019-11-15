@@ -12,14 +12,15 @@ class User < ActiveRecord::Base
             key(:title).ask("Title your question:  ")
             key(:body).ask("Enter more details regarding your question:  ")
         end
-        Question.create_new_question(new_question[:title], new_question[:body], )
+        Question.create_new_question(new_question[:title], new_question[:body], @current_user_id)
     end
 
-    def self.store_user(username)
+    def self.store_user
         get_user = User.all.each do |user|
             if user.name == username
-                user.id
+                @current_user_id = user.id
             end
         end
     end
+
 end

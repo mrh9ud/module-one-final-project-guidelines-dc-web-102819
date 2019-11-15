@@ -52,7 +52,7 @@ class CLI
             user.name == username
         end
         if get_user
-            User.store_user(username)
+            User.store_user
         end
     end
 
