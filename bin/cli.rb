@@ -63,7 +63,9 @@ class CLI
         more_info = PROMPT.yes?("Hello, #{username}! Would you like more information about #{PROGRAM_NAME} before continuing?")
         if more_info
             puts "\n"
+            puts "Contributor: Matthew R Heavner"
             load_image("./images/profile_pic.jpeg")
+            puts "\nContributor: Jose D Romero"
             load_image("./images/avatar.jpeg")
             puts "\n" + PROGRAM_INFO
             press_enter("\nPress Enter to Continue to the Main Menu...")
@@ -222,7 +224,8 @@ class CLI
         begin
             exit
         rescue SystemExit
-            p "\nClosing #{PROGRAM_NAME}"
+            
+            puts "\n" + "Closing #{PROGRAM_NAME}"
         end
     end
 
