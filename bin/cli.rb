@@ -10,7 +10,6 @@ class CLI
       puts "\n"
       puts "Welcome to:"
       puts USE_ARTII.asciify(PROGRAM_NAME)
-    #   load_image
       ask_if_account
     end
 
@@ -35,14 +34,12 @@ class CLI
         end
     end
 
-
-
     def ask_username
         puts "\n"
         username = PROMPT.ask("What is your username?")
-        if username_exists(username)
-            User.store_user(username)
-            user_greeting(username)
+        @current_user = username_exists?(username)
+        if @current_user
+            user_greeting(@current_user.name)
         else
             puts "\n"
             if PROMPT.yes?("Username not found. Would you like to try again?")
@@ -53,10 +50,8 @@ class CLI
         end
     end
 
-    def username_exists(username)
-        User.all.find do |user|
-            user.name == username
-        end
+    def username_exists?(username)
+        User.find_by(name: username)
     end
 
     def user_greeting(username)
@@ -85,13 +80,13 @@ class CLI
 
     def self.sub_menu_case_selector
         case @@main_menu_selection
-        when @@main_menu_selection = "Tags"
+        when "Tags"
             CLI.tag_menu
-        when @@main_menu_selection = "Questions"
+        when "Questions"
             CLI.question_menu
-        when @@main_menu_selection = "Answers"
+        when "Answers"
             CLI.answer_menu
-        when @@main_menu_selection = "Exit the program"
+        when "Exit the program"
             CLI.close_ruby_overflow
         end
     end
@@ -111,22 +106,22 @@ class CLI
 
     def self.sub_tag_menu_case_selector
         case @@tag_menu_selection
-        when @@tag_menu_selection = "Most Common Tags"
+        when "Most Common Tags"
             Tag.most_common_tags
             CLI.tag_menu
-        when @@tag_menu_selection = "Tags Listed by Frequency of Use"
+        when "Tags Listed by Frequency of Use"
             Tag.tags_by_frequency
             CLI.tag_menu
-        when @@tag_menu_selection = "Tags by Date Added"
+        when "Tags by Date Added"
             Tag.tags_by_date_added
             CLI.tag_menu
-        when @@tag_menu_selection = "List of all Tags"
+        when "List of all Tags"
             Tag.all_tags
             CLI.tag_menu
-        when @@tag_menu_selection = "Find by Tag Name"
+        when "Find by Tag Name"
             CLI.tag_search
             CLI.tag_menu
-        when @@tag_menu_selection = "Return to Main Menu"
+        when "Return to Main Menu"
             CLI.main_menu
         end
     end
@@ -146,22 +141,22 @@ class CLI
 
     def self.sub_question_menu_case_selector
         case @@question_menu_selection
-        when @@question_menu_selection = "Questions Listed by Date Added"
+        when "Questions Listed by Date Added"
             Question.questions_by_date_added
             CLI.question_menu
-        when @@question_menu_selection = "List of all Questions Asked"
+        when "List of all Questions Asked"
             Question.all_questions
             CLI.question_menu
-        when @@question_menu_selection = "Find a Question by Title"
+        when "Find a Question by Title"
             CLI.question_search
             CLI.question_menu
-        when @@question_menu_selection = "Find a Question by its Tags"
+        when "Find a Question by its Tags"
             Question.question_by_tags_search
             CLI.question_menu
-        when @@question_menu_selection = "Post a New Question"
+        when "Post a New Question"
             User.user_question_prompt
             CLI.question_menu
-        when @@question_menu_selection = "Return to Main Menu"
+        when "Return to Main Menu"
             CLI.main_menu
         end
     end
@@ -180,19 +175,19 @@ class CLI
 
     def self.sub_answer_menu_case_selector
         case @@answer_menu_selection
-        when @@answer_menu_selection = "Answers sort by Title"
+        when "Answers sort by Title"
             Answer.sorted_by_title
             CLI.answer_menu
-        when @@answer_menu_selection = "Answers sort by Date"
+        when "Answers sort by Date"
             Answer.sorted_by_date
             CLI.answer_menu
-        when @@answer_menu_selection = "List of all Answers"
+        when "List of all Answers"
             Answer.sorted_by_body
             CLI.answer_menu
-        when @@answer_menu_selection = "Answers find by Title"
+        when "Answers find by Title"
             CLI.answer_search_by_title
             CLI.answer_menu
-        when @@answer_menu_selection = "Return to Main Menu"
+        when "Return to Main Menu"
             CLI.main_menu
         end
     end

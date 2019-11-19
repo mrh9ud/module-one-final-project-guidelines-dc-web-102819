@@ -9,12 +9,12 @@ class Tag < ActiveRecord::Base
        most_common_tags = Tag.joins(:question_tags).select("tags.name, COUNT(question_tags.tag_id)").group("question_tags.tag_id").limit(2)
        puts "\n"
        most_common_tags.collect do |tag|
-            puts tag.name
+            tag.name
        end
     end
 
-    def self.tags_by_frequency
-        most_common_tags = Tag.joins(:question_tags).select("tags.name, COUNT(question_tags.tag_id)").group("question_tags.tag_id")
+    def self.tags_by_frequency(tag_number=Infinity)
+        most_common_tags = Tag.joins(:question_tags).select("tags.name, COUNT(question_tags.tag_id)").group("question_tags.tag_id").limit(tag_number)
         puts "\n"
         most_common_tags.collect do |tag|
             puts tag.name
