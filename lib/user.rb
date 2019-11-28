@@ -4,9 +4,7 @@ class User < ActiveRecord::Base
     PROMPT = TTY::Prompt.new
 
     def self.create_user(username)
-        User.create(name: username)
-        # binding.pry
-        # User.store_user(username)
+        User.create(name: username.downcase)
     end
 
     def self.user_question_prompt

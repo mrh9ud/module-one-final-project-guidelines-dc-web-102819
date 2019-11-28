@@ -37,7 +37,7 @@ class CLI
 
     def ask_username
         puts "\n"
-        username = PROMPT.ask("What is your username?")
+        username = PROMPT.ask("What is your username? Is case sensitive:  ")
         @current_user = username_exists?(username)
         if @current_user
             user_greeting(@current_user.name)
@@ -53,12 +53,10 @@ class CLI
 
     def username_exists?(username)
         User.find_by(name: username)
-            
-        
     end
 
     def user_greeting(username)
-        more_info = PROMPT.yes?("Hello, #{username}! Would you like more information about #{PROGRAM_NAME} before continuing?")
+        more_info = PROMPT.yes?("Hello, #{username.titlecase}! Would you like more information about #{PROGRAM_NAME} before continuing?")
         if more_info
             puts "\n" + "Contributor: Matthew R Heavner"
             load_image("./images/profile_pic.jpeg")
