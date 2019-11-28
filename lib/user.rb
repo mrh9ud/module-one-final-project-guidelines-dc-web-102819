@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
 
     def self.create_user(username)
         User.create(name: username)
-        User.store_user(username)
+        # binding.pry
+        # User.store_user(username)
     end
 
     def self.user_question_prompt
@@ -15,13 +16,4 @@ class User < ActiveRecord::Base
         end
         Question.create_new_question(new_question[:title], new_question[:body], @current_user_id)
     end
-
-    def self.store_user(username)
-        get_user = User.all.each do |user|
-            if user.name == username
-                @current_user_id = user.id
-            end
-        end
-    end
-
 end

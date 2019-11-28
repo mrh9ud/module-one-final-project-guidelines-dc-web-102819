@@ -25,12 +25,13 @@ class CLI
     def create_new_username
         puts "\n"
         new_username = PROMPT.ask("Create an account to continue. Input a username:  ")
-        if username_exists(new_username)
+        if username_exists?(new_username)
             puts "\n" + "Username Unavailable"
             create_new_username
         else
-            User.create_user(new_username)
-            user_greeting(new_username)
+            @current_user = User.create_user(new_username)
+            User.find_by(name: new_username)
+            user_greeting(@current_user.name)
         end
     end
 
@@ -52,6 +53,8 @@ class CLI
 
     def username_exists?(username)
         User.find_by(name: username)
+            
+        
     end
 
     def user_greeting(username)
