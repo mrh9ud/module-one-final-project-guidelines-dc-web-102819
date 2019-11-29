@@ -14,12 +14,15 @@ class CLI
     end
 
     def ask_if_account
-        account_prompt = PROMPT.yes?("Do you already have an account with us?")
-        if account_prompt
-            ask_username
-        else
-            create_new_username    
-        end
+        account_prompt = PROMPT.ask("Do you already have an account with us? ('y' or 'n'):")
+            if account_prompt == 'y'
+                ask_username
+            elsif account_prompt == 'n'
+                create_new_username
+            else
+                puts "\nMust input 'y' or 'n' to proceed"
+                ask_if_account
+            end
     end
 
     def create_new_username
@@ -37,7 +40,7 @@ class CLI
 
     def ask_username
         puts "\n"
-        username = PROMPT.ask("What is your username? Is case sensitive:  ")
+        username = PROMPT.ask("What is your username? Is case sensitive: ")
         @current_user = username_exists?(username)
         if @current_user
             user_greeting(@current_user.name)
@@ -56,14 +59,19 @@ class CLI
     end
 
     def user_greeting(username)
-        more_info = PROMPT.yes?("Hello, #{username.titlecase}! Would you like more information about #{PROGRAM_NAME} before continuing?")
-        if more_info
+        more_info = PROMPT.ask("Hello, #{username.titlecase}! Would you like more information about #{PROGRAM_NAME} before continuing? ('y' or 'n'):")
+        if more_info == 'y'
             puts "\n" + "Contributor: Matthew R Heavner"
             load_image("./images/profile_pic.jpeg")
             puts "\nContributor: Jose D Romero"
             load_image("./images/avatar.jpeg")
             puts "\n" + PROGRAM_INFO
             press_enter("\nPress Enter to Continue to the Main Menu...")
+        elsif more_info == 'n'
+            CLI.main_menu
+        else
+            puts "\nMust input 'y' or 'n' to proceed."
+            user_greeting(@current_user.name)
         end
         CLI.main_menu
     end
@@ -219,7 +227,6 @@ class CLI
         begin
             exit
         rescue SystemExit
-            
             puts "\n" + "Closing #{PROGRAM_NAME}"
         end
     end
