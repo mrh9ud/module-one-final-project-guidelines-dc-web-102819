@@ -226,8 +226,6 @@ class CLI
     def self.close_ruby_overflow
         begin
             exit
-        rescue SystemExit
-            puts "\n" + "Closing #{PROGRAM_NAME}"
         end
     end
 
